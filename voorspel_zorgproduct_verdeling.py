@@ -5,6 +5,12 @@ Created on Wed May  9 17:09:15 2018
 @author: Sven
 
 Dit script voorspelt de verdeling van zorgproducten door regressie.
+
+To-Do:
+    (1) Maak een eerste voorspelling met echte data
+    (2) Voeg ridge-regressie toe
+    (3) plot de gewichten van de maanden voor ieder lambda
+    (4) maak een cross-validatie met de data
 """
 
 def maak_data(aantal_maanden = 72, aantal_agb = 6, aantal_spec = 2, aantal_dia = 3, aantal_ZP = 5):
