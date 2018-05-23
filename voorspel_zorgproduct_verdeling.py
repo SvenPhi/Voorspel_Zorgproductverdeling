@@ -12,35 +12,9 @@ To-Do:
     (3) plot de gewichten van de maanden voor ieder lambda
     (4) maak een cross-validatie met de data
 """
+import import_data as imp
 
-def maak_data(aantal_maanden = 72, aantal_agb = 6, aantal_spec = 2, aantal_dia = 3, aantal_ZP = 5):
-    """Deze functie maakt de data voor de verdere analyse."""
-    import pandas as pd
-    import numpy as np
-    
-    declaraties = pd.DataFrame({"Maand_Nr": [-1,-1],"AGB_ID": [-1,-1],
-                                "SPECIALISME_ID": [-1,-1],"DIAGNOSE_ID": [-1,-1],
-                                "ZORGPRODUCT_ID": [-1,-1],"AANTAL": [0,0]})
-    
-    for maand in range(1,aantal_maanden + 1):
-        for agb in range(aantal_agb + 1):
-            for spec in range(aantal_spec):
-                for dia in range(aantal_dia):
-                    for zorgproduct in range(aantal_ZP):
-                        aantal = np.random.binomial(n = 15,
-                                                    p = 0.4,
-                                                    size = 1) + 1
-                        decl = pd.DataFrame({"Maand_Nr": maand,
-                                             "AGB_ID": agb,
-                                             "SPECIALISME_ID": spec,
-                                             "DIAGNOSE_ID": dia,
-                                             "ZORGPRODUCT_ID": zorgproduct,
-                                             "AANTAL": aantal})
-                        declaraties = pd.concat([declaraties,decl], axis = 0, ignore_index = True)
-                        
-    declaraties = declaraties[declaraties.Maand_Nr != -1]
-    #declaraties.reshape(declaraties.shape())
-    return declaraties
+
 
 def regressie_functie(verdeling):
     """Deze functie neemt een zorgprudctverdeling 'verdeling' (numpy-array)
@@ -111,7 +85,7 @@ def bepaal_gewichten(data, betrouwbaar_tot, maanden_terug = 12, maanden_vooruit 
     return y_chk
     
 #main:
-declaratie_data = maak_data(aantal_agb = 0, aantal_spec = 1, aantal_dia = 1)
+declaratie_data = imp.maak_dummy_data()
 
 zorgproductgewichten = bepaal_gewichten(data = declaratie_data, betrouwbaar_tot = 60)
 #print(zorgproductgewichten)
